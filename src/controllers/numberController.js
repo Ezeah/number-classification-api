@@ -3,7 +3,7 @@ class NumberController {
         const number = parseInt(req.query.number, 10);
 
         if (isNaN(number) || !Number.isInteger(number)) {
-            return res.status(400).json({ number: req.query.number, error: true });
+            return res.status(400).json({ number: "alphabet", error: true });
         }
 
         const isPrime = this.isPrime(number);
