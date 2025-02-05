@@ -50,9 +50,8 @@ The API will be available at `https://number-classification-api-v0n3.onrender.co
 
 or
 ```
-
 http://localhost:3000/api/classify-number?number=<your-number>
-
+```
 
 ## API Endpoint
 
