@@ -46,11 +46,10 @@ To start the server, run:
 npm start
 ```
 
-The API will be available at `https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=<your-number>`.
-
+The API will be available at `http://localhost:3000/api/classify-number?number=<input-number>`.
 or
 ```
-http://localhost:3000/api/classify-number?number=<your-number>
+https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=<input-number>
 ```
 
 ## API Endpoint
