@@ -5,14 +5,18 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"No tests specified\" && exit 0"
+    "test": "mocha"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
-    "axios": "^0.21.1"
+    "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^11.1.0",
+    "supertest": "^7.0.0"
+  },
   "keywords": [
     "API",
     "numbers",

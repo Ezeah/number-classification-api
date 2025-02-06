@@ -1,6 +1,6 @@
 module.exports = {
     isPrime: function(num) {
-        if (num <= 1) return false;
+        if (num <= 1) return false; // Correctly handle 0 and 1
         for (let i = 2; i <= Math.sqrt(num); i++) {
             if (num % i === 0) return false;
         }
@@ -23,6 +23,6 @@ module.exports = {
     },
 
     digitSum: function(num) {
-        return num.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+        return Math.abs(num).toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
     }
 };
