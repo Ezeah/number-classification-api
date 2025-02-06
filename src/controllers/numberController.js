@@ -31,18 +31,21 @@ class NumberController {
 
     isPrime(num) {
         if (num <= 1) return false;
-        for (let i = 2; i <= Math.sqrt(num); i++) {
+        for (let i = 2; i < num; i++) {
             if (num % i === 0) return false;
         }
         return true;
     }
 
     isPerfect(num) {
-        let sum = 0;
-        for (let i = 1; i < num; i++) {
-            if (num % i === 0) sum += i;
+        let sum = 1;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+                if (i === (num / i)) sum += i;
+                else sum += (i + num / i);
+            }
         }
-        return sum === num;
+        return sum === num && num !== 1;
     }
 
     isArmstrong(num) {
@@ -58,7 +61,8 @@ class NumberController {
 
     async getFunFact(num) {
         const response = await fetch(`http://numbersapi.com/${num}/math`);
-        return response.text();
+        const text = await response.text();
+        return text;
     }
 }
 
