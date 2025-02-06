@@ -23,6 +23,6 @@ module.exports = {
     },
 
     digitSum: function(num) {
-        return num.toString().split('').reduce((acc, digit) => acc + Number(digit), 0);
+        return num.toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
     }
 };
