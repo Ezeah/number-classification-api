@@ -19,22 +19,22 @@ This project is a simple API that classifies numbers based on various mathematic
 ## Installation
 
 1. Clone the repository:
-   ```
+   ```sh
    git clone https://github.com/ezeah/number-classification-api.git
    ```
 2. Navigate to the project directory:
-   ```
+   ```sh
    cd number-classification-api
    ```
 3. Install the dependencies:
-   ```
+   ```sh
    npm install
    ```
 
 ## Configuration
 
 1. Create a `.env` file in the root directory and set the following environment variables:
-   ```
+   ```sh
    PORT=3000
    NUMBERS_API_URL=http://numbersapi.com/
    ```
@@ -42,25 +42,41 @@ This project is a simple API that classifies numbers based on various mathematic
 ## Usage
 
 To start the server, run:
-```
+```sh
 npm start
 ```
 
 The API will be available at:
 
-```
-https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=<input-number>
+```sh
+https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=<number>
 ```
 
 ## API Endpoint
 
-### GET /api/classify-number?number=<number>
+### GET /api/classify-number
 
 #### Query Parameters
 
-- `number`: An integer to classify.
+- `number`(required): The number to classify.
 
-#### Response Format (200 OK)
+### Response Format
+
+The response will be a JSON object with the following properties:
+
+- `number` (number): The input number.
+- `is_prime` (boolean): Whether the number is prime.
+- `is_perfect` (boolean): Whether the number is perfect.
+- `properties` (array): An array of properties that the number - - satisfies (e.g., "even", "odd", "armstrong").
+- `digit_sum` (number): The sum of the digits of the number.
+- `fun_fact` (string): A fun fact about the number.
+
+### Example Request
+```sh
+GET /api/classify-number?number=371
+```
+
+#### Example Response (200 OK)
 
 ```json
 {
@@ -73,7 +89,7 @@ https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=
 }
 ```
 
-#### Response Format (400 Bad Request)
+#### Example Response (400 Bad Request)
 
 ```json
 {
@@ -84,10 +100,19 @@ https://number-classification-api-v0n3.onrender.com/api/classify-number/?number=
 
 ## Code Structure
 
-- `src/index.js`: Entry point of the application.
-- `src/controllers/numberController.js`: Contains the logic for classifying numbers.
-- `src/routes/numberRoutes.js`: Defines the API routes.
-- `src/utils/numberUtils.js`: Utility functions for mathematical calculations.
+- `src/index.mjs`: Entry point of the application.
+- `src/controllers/numberController.mjs`: Contains the logic for classifying numbers.
+- `src/routes/numberRoutes.mjs`: Defines the API routes.
+- `src/utils/numberUtils.mjs`: Utility functions for mathematical calculations.
+- `test/utils/numberRoutes.test.mjs`: Test the API routes.
+
+## Running Tests
+
+To run the tests, use the following command:
+
+```sh
+npm test
+```
 
 ## License
 
