@@ -44,5 +44,40 @@ export function isArmstrong(num) {
  * @returns {number} - The digit sum of the number.
  */
 export function digitSum(num) {
-    return Math.abs(num).toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+    const sum = Math.abs(num).toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+    return num < 0 ? -sum : sum;
+}
+
+/**
+ * Classify a number based on various properties.
+ * @param {string} input - The input to classify.
+ * @returns {object} - The classification result.
+ */
+export function classifyNumber(input) {
+    // Check if the input contains any non-numeric characters
+    if (!/^-?\d+$/.test(input)) {
+        return { error: true };
+    }
+
+    const num = parseInt(input, 10);
+
+    const isPrimeResult = isPrime(num);
+    const isPerfectResult = isPerfect(num);
+    const isArmstrongResult = isArmstrong(num);
+    const digitSumResult = digitSum(num);
+    const properties = [];
+
+    if (isArmstrongResult) {
+        properties.push('armstrong');
+    }
+    properties.push(num % 2 === 0 ? 'even' : 'odd');
+
+    return {
+        number: num,
+        is_prime: isPrimeResult,
+        is_perfect: isPerfectResult,
+        properties: properties,
+        digit_sum: digitSumResult,
+        error: false
+    };
 }

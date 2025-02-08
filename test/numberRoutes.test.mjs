@@ -36,12 +36,37 @@ describe('GET /api/classify-number', function() {
      */
     it('should return error for non-numeric input', async () => {
         const res = await request(app)
-            .get('/api/classify-number?number=abc')
+            .get('/api/classify-number?number=a')
             .expect('Content-Type', /json/)
             .expect(400);
 
-        const { number, error } = res.body;
-        expect(number).to.equal('alphabet');
+        const { error } = res.body;
+        expect(error).to.be.true;
+    });
+
+    /**
+     * Test case for handling non-numeric input 2rw3.
+     */
+    it('should return error for non-numeric input 2rw3', async () => {
+        const res = await request(app)
+            .get('/api/classify-number?number=2rw3')
+            .expect('Content-Type', /json/)
+            .expect(400);
+
+        const { error } = res.body;
+        expect(error).to.be.true;
+    });
+
+    /**
+     * Test case for handling non-numeric input sample.
+     */
+    it('should return error for non-numeric input sample', async () => {
+        const res = await request(app)
+            .get('/api/classify-number?number=sample')
+            .expect('Content-Type', /json/)
+            .expect(400);
+
+        const { error } = res.body;
         expect(error).to.be.true;
     });
 
@@ -64,20 +89,20 @@ describe('GET /api/classify-number', function() {
     });
 
     /**
-     * Test case for classifying a negative number.
+     * Test case for classifying a negative number and returning negative digit sum.
      */
-    it('should classify a negative number', async () => {
+    it('should classify a negative number and return negative digit sum', async () => {
         const res = await request(app)
-            .get('/api/classify-number?number=-5')
+            .get('/api/classify-number?number=-124')
             .expect('Content-Type', /json/)
             .expect(200);
 
         const { number, is_prime, is_perfect, properties, digit_sum, fun_fact } = res.body;
-        expect(number).to.equal(-5);
+        expect(number).to.equal(-124);
         expect(is_prime).to.be.false;
         expect(is_perfect).to.be.false;
-        expect(properties).to.include('odd');
-        expect(digit_sum).to.equal(5);
+        expect(properties).to.include('even');
+        expect(digit_sum).to.equal(-7);
         expect(fun_fact).to.be.a('string');
     });
 
@@ -97,6 +122,60 @@ describe('GET /api/classify-number', function() {
         expect(is_perfect).to.be.false;
         expect(properties).to.include('odd');
         expect(digit_sum).to.be.a('number');
+        expect(fun_fact).to.be.a('string');
+    });
+
+    /**
+     * Test case for classifying -4.
+     */
+    it('should classify -4', async () => {
+        const res = await request(app)
+            .get('/api/classify-number?number=-4')
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        const { number, is_prime, is_perfect, properties, digit_sum, fun_fact } = res.body;
+        expect(number).to.equal(-4);
+        expect(is_prime).to.be.false;
+        expect(is_perfect).to.be.false;
+        expect(properties).to.include('even');
+        expect(digit_sum).to.equal(-4);
+        expect(fun_fact).to.be.a('string');
+    });
+
+    /**
+     * Test case for classifying 124.
+     */
+    it('should classify 124', async () => {
+        const res = await request(app)
+            .get('/api/classify-number?number=124')
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        const { number, is_prime, is_perfect, properties, digit_sum, fun_fact } = res.body;
+        expect(number).to.equal(124);
+        expect(is_prime).to.be.false;
+        expect(is_perfect).to.be.false;
+        expect(properties).to.include('even');
+        expect(digit_sum).to.equal(7);
+        expect(fun_fact).to.be.a('string');
+    });
+
+    /**
+     * Test case for classifying 450.
+     */
+    it('should classify 450', async () => {
+        const res = await request(app)
+            .get('/api/classify-number?number=450')
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        const { number, is_prime, is_perfect, properties, digit_sum, fun_fact } = res.body;
+        expect(number).to.equal(450);
+        expect(is_prime).to.be.false;
+        expect(is_perfect).to.be.false;
+        expect(properties).to.include('even');
+        expect(digit_sum).to.equal(9);
         expect(fun_fact).to.be.a('string');
     });
 });
